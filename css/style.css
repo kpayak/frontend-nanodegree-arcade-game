@@ -1,3 +1,78 @@
 body {
     text-align: center;
 }
+
+#scorecard {
+    position: absolute;
+    right: 100px;
+    top: 100px;
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    color: blueviolet;
+}
+
+#score {
+    font-size: 26px;
+    transition: all 0.2s;
+}
+
+#score.red {
+    color: red;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+#score.green {
+    color: green;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+#difficulty-level {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 200px;
+    background-color: green;
+    position: absolute;
+    top: 200px;
+    left: 440px;
+    transition: all 0.5s;
+}
+
+#difficulty-level.dismiss {
+    top: -200px;
+}
+
+#easy-button,
+#medium-button,
+#hard-button {
+    margin: 5px;
+    font-size: 16px;
+    width: 100px;
+    height: 50px;
+}
+
+#game-over-dialog {
+    position: absolute;
+    top: -200px;
+    left: 530px;
+    width: 200px;
+    height: 200px;
+    font-size: 26px;
+    font-weight: bold;
+    background-color: lawngreen;
+    color: firebrick;
+    transition: all 0.5s;
+}
+
+#game-over-dialog.active {
+    top: 200px;
+}
+
+#restart,
+#exit {
+    font-size: 20px;
+}

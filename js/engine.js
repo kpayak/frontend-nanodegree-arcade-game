@@ -26,9 +26,11 @@ var Engine = (function (global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -41,24 +43,28 @@ var Engine = (function (global) {
          * computer is) - hurray time!
          */
 
-        var now = Date.now(),
-            dt = (now - lastTime) / 1000.0;
-        //console.log("dt=" + dt);
-        /* Call our update/render functions, pass along the time delta to
-         * our update function since it may be used for smooth animation.
-         */
-        update(dt);
-        render();
+        if (play == true) {
+            var now = Date.now(),
+                dt = (now - lastTime) / 1000.0;
 
-        /* Set our lastTime variable which is used to determine the time delta
-         * for the next time this function is called.
-         */
-        lastTime = now;
+            /* Call our update/render functions, pass along the time delta to
+             * our update function since it may be used for smooth animation.
+             */
+            update(dt);
+            render();
+            detectCollision(player, allEnemies);
+            displayScore();
+            /* Set our lastTime variable which is used to determine the time delta
+             * for the next time this function is called.
+             */
+            lastTime = now;
 
-        /* Use the browser's requestAnimationFrame function to call this
-         * function again as soon as the browser is able to draw another frame.
-         */
-        win.requestAnimationFrame(main);
+            /* Use the browser's requestAnimationFrame function to call this
+             * function again as soon as the browser is able to draw another frame.
+             */
+
+            win.requestAnimationFrame(main);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -66,7 +72,11 @@ var Engine = (function (global) {
      * game loop.
      */
     function init() {
+        console.log("init");
+        //levelSelector();
         reset();
+        //Adding render call to show canvas very first time
+        render();
         lastTime = Date.now();
         main();
     }
@@ -160,7 +170,10 @@ var Engine = (function (global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        player.x = playerResetX;
+        player.y = playerResetY;
+        score = 100;
+        //play = false;
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -181,4 +194,17 @@ var Engine = (function (global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+
+    /* if 'restart' button is clicked, call init again*/
+    var restartButton = document.getElementById('restart');
+    restartButton.addEventListener('click', function () {
+        console.log("restarting..");
+        //Remove Game Over Dialog
+        document.getElementById('game-over-dialog').className = "";
+        //Show Difficulty Level Dialog
+        document.getElementById('difficulty-level').className = '';
+        play = true;
+        //Initialize game again
+        init();
+    });
 })(this);
