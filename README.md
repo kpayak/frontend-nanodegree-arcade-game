@@ -1,6 +1,13 @@
-frontend-nanodegree-arcade-game
-===============================
+# Classic Arcade Game Clone
 
+## Description
+- Use object-oriented Javascript principles to design a classic arcade game where player has to avoid enemy collisions. 
+- Rendering is done using HTML5 Canvas & JS requestAnimationFrame.
+
+## Live Demo
+https://kpayak.github.io/frontend-nanodegree-arcade-game/
+
+## Play on your local machine
 1. To Start the game, open index.html file in Chrome.
 2. Game starts by asking you for difficulty level (easy, medium or hard). From easy to hard, number of bugs and their speed increases.
 3. You start with 100 points. 
